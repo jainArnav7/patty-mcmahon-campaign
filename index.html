@@ -1,0 +1,507 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patty McMahon | Campaign Portfolio</title>
+<style>
+:root {
+  --blue: #3b82f6;
+  --ink: #080a10;
+  --paper: #f5f5f7;
+  --muted: #a1a1aa;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: var(--ink);
+  color: white;
+}
+a { color: inherit; }
+#progress {
+  position: fixed; inset: 0 auto auto 0;
+  width: 0; height: 3px; background: var(--blue);
+  z-index: 20;
+}
+nav {
+  position: fixed; inset: 0 0 auto;
+  z-index: 15; height: 58px;
+  display: flex; align-items: center;
+  justify-content: space-between; padding: 0 6%;
+  background: #080a10c9; backdrop-filter: blur(18px);
+  border-bottom: 1px solid #ffffff12;
+}
+nav a { text-decoration: none; font-size: 12px; }
+.nav-links { display: flex; gap: 22px; }
+.brand { font-weight: 650; letter-spacing: -.4px; }
+.scene {
+  min-height: 100svh; padding: 120px 9%;
+  display: flex; flex-direction: column;
+  justify-content: center; position: relative;
+  overflow: clip;
+}
+.dark { background: var(--ink); color: white; }
+.light { background: var(--paper); color: #111827; }
+.eyebrow {
+  font-size: 11px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--blue);
+  font-weight: 650;
+}
+h1, h2, p { margin-top: 0; }
+h1 {
+  font-size: clamp(52px, 10vw, 124px);
+  line-height: .93; letter-spacing: -.075em;
+  max-width: 1000px; margin: 26px 0;
+}
+h2 {
+  font-size: clamp(38px, 6vw, 76px);
+  line-height: 1; letter-spacing: -.06em;
+  margin: 22px 0;
+}
+p {
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.65; max-width: 640px;
+  color: #a1a1aa;
+}
+.light p { color: #52525b; }
+.hero {
+  background:
+    radial-gradient(ellipse at 75% 55%, #17366c 0%, transparent 42%),
+    linear-gradient(135deg, #080a10, #101827);
+}
+.hero::after {
+  content: ""; position: absolute;
+  width: 55vw; height: 55vw; max-width: 650px;
+  border: 1px solid #60a5fa30; border-radius: 50%;
+  right: -12%; bottom: -28%;
+  box-shadow: 0 0 0 50px #60a5fa08,
+              0 0 0 100px #60a5fa05;
+  pointer-events: none;
+}
+.hero-content { position: relative; z-index: 1; }
+.hero p { color: #c4c9d4; }
+.button {
+  display: inline-flex; padding: 14px 21px;
+  background: var(--blue); color: white;
+  border-radius: 999px; text-decoration: none;
+  font-size: 14px; margin-top: 14px;
+}
+.big-number {
+  font-size: clamp(80px, 15vw, 170px);
+  font-weight: 650; letter-spacing: -.09em;
+  line-height: 1;
+}
+.label {
+  font-size: 12px; color: #71717a;
+  letter-spacing: .1em; text-transform: uppercase;
+}
+.reveal {
+  opacity: 0; transform: translateY(35px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.pin-wrap { height: 190vh; position: relative; }
+.pin {
+  position: sticky; top: 0; height: 100svh;
+  padding: 100px 9%; display: flex;
+  flex-direction: column; justify-content: center;
+  overflow: hidden;
+}
+.branch-grid, .issue-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 12px; margin-top: 34px;
+}
+.panel {
+  border: 1px solid #ffffff24; padding: 22px;
+  border-radius: 18px; min-height: 145px;
+  transition: transform .3s, background .3s;
+}
+.light .panel { border-color: #d4d4d8; }
+.panel:hover { transform: translateY(-5px); }
+.panel h3 { margin-top: 0; font-size: 18px; }
+.panel p { font-size: 14px; }
+.timeline {
+  border-left: 1px solid #cbd5e1;
+  margin: 40px 0 0 8px; padding-left: 28px;
+}
+.timeline article {
+  padding: 0 0 32px; position: relative;
+}
+.timeline article::before {
+  content: ""; position: absolute;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--blue); left: -33px; top: 6px;
+}
+.timeline h3 { margin: 0 0 8px; }
+.timeline p { font-size: 15px; }
+.finance {
+  display: flex; align-items: end; gap: 14px;
+  height: 230px; margin: 35px 0 12px;
+  border-bottom: 1px solid #ffffff30;
+}
+.bar {
+  flex: 1; min-width: 0; height: 0;
+  background: linear-gradient(#60a5fa, #2563eb);
+  border-radius: 7px 7px 0 0;
+  transition: height 1.2s cubic-bezier(.2,.7,.2,1);
+  position: relative;
+}
+.bar span {
+  position: absolute; bottom: -28px; left: 50%;
+  transform: translateX(-50%); font-size: 11px;
+  color: #a1a1aa; white-space: nowrap;
+}
+.note {
+  border-left: 3px solid var(--blue);
+  padding: 12px 16px; margin-top: 24px;
+  background: #3b82f610; font-size: 14px;
+  line-height: 1.6;
+}
+.gallery {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 14px; margin-top: 30px;
+}
+.gallery .panel { min-height: 200px; }
+footer {
+  padding: 60px 9%; background: #050609;
+  color: #a1a1aa; font-size: 13px; line-height: 2;
+}
+footer a { color: #93c5fd; }
+@media (max-width: 650px) {
+  .nav-links { gap: 12px; }
+  .nav-links a:nth-child(2), .nav-links a:nth-child(3) {
+    display: none;
+  }
+  .scene { padding: 100px 7%; }
+  .branch-grid, .issue-grid { grid-template-columns: 1fr; }
+  .pin { padding: 80px 7%; }
+  .gallery { grid-template-columns: 1fr; }
+  .panel { min-height: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<nav>
+  <a class="brand" href="#home">McMahon / 2026</a>
+  <div class="nav-links">
+    <a href="#candidate">Candidate</a>
+    <a href="#issues">Issues</a>
+    <a href="#strategy">Strategy</a>
+    <a href="#sources">Sources</a>
+  </div>
+</nav>
+
+<main>
+  <section class="scene hero" id="home">
+    <div class="hero-content reveal">
+      <div class="eyebrow">2026 · Colorado's 6th District</div>
+      <h1>A different<br>view of Congress.</h1>
+      <p>
+        Patty McMahon. A digital campaign portfolio exploring
+        the candidate, her stated positions, and the role of
+        money and strategy in a congressional election.
+      </p>
+      <a class="button" href="#candidate">Explore the story ↓</a>
+    </div>
+  </section>
+
+  <section class="scene light" id="candidate">
+    <div class="reveal">
+      <div class="eyebrow">01 / The candidate</div>
+      <h2>A career in<br>public service.</h2>
+      <p>
+        McMahon's campaign describes 35 years of federal
+        service at the Equal Employment Opportunity Commission.
+        Her campaign biography also lists Metropolitan State
+        University of Denver.
+      </p>
+      <div class="big-number">
+        <span data-count="35">0</span>
+      </div>
+      <div class="label">Years of federal service, as stated by her campaign</div>
+      <div class="note">
+        Verify the full biography, education details, and dates
+        against primary sources before submitting the project.
+      </div>
+    </div>
+  </section>
+
+  <section class="pin-wrap dark">
+    <div class="pin">
+      <div class="eyebrow">02 / The institution</div>
+      <h2 class="pin-title">Who holds<br>the power?</h2>
+      <p class="pin-copy">
+        The U.S. Constitution divides federal power among three
+        branches. Scroll to explore their different roles.
+      </p>
+      <div class="branch-grid">
+        <article class="panel reveal">
+          <h3>01 · Congress</h3>
+          <p>Makes federal laws, controls spending, and conducts oversight.</p>
+        </article>
+        <article class="panel reveal">
+          <h3>02 · President</h3>
+          <p>Enforces federal laws and leads the executive branch.</p>
+        </article>
+        <article class="panel reveal">
+          <h3>03 · Courts</h3>
+          <p>Resolve legal cases and interpret the law.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene light" id="issues">
+    <div class="reveal">
+      <div class="eyebrow">03 / The issues</div>
+      <h2>Positions.<br>Evidence.<br>Consequences.</h2>
+      <p>
+        Explore the candidate's documented views and compare
+        stated positions with the policy questions facing Congress.
+      </p>
+      <div class="issue-grid">
+        <article class="panel">
+          <h3>Civil rights</h3>
+          <p>Add verified positions on civil liberties, immigration, and equal protection.</p>
+        </article>
+        <article class="panel">
+          <h3>The economy</h3>
+          <p>Add sourced positions on taxation, spending, and economic policy.</p>
+        </article>
+        <article class="panel">
+          <h3>Education</h3>
+          <p>Add sourced positions on school funding and higher education.</p>
+        </article>
+        <article class="panel">
+          <h3>Environment</h3>
+          <p>Add sourced positions on energy, pollution, and public lands.</p>
+        </article>
+        <article class="panel">
+          <h3>Health care</h3>
+          <p>Add sourced positions on insurance, drug costs, and public programs.</p>
+        </article>
+        <article class="panel">
+          <h3>Security</h3>
+          <p>Add sourced positions on public safety, defense, and firearms policy.</p>
+        </article>
+      </div>
+      <div class="note">
+        These are research categories, not claims about McMahon's
+        position on each issue. Link each policy to a reliable source.
+      </div>
+    </div>
+  </section>
+
+  <section class="scene dark" id="finance">
+    <div class="reveal">
+      <div class="eyebrow">04 / Campaign finance</div>
+      <h2>Follow<br>the money.</h2>
+      <p>
+        Campaign finance records can show where campaign resources
+        come from and how they are spent. They do not, by
+        themselves, prove that a donation purchased a policy promise.
+      </p>
+      <div class="finance" id="chart">
+        <div class="bar" data-height="60"><span>Source 1</span></div>
+        <div class="bar" data-height="85"><span>Source 2</span></div>
+        <div class="bar" data-height="45"><span>Source 3</span></div>
+        <div class="bar" data-height="100"><span>Source 4</span></div>
+        <div class="bar" data-height="70"><span>Source 5</span></div>
+      </div>
+      <div class="note">
+        Placeholder chart only. Replace every bar with verified
+        contribution data, reporting dates, and source links.
+        Do not present these bar heights as real campaign figures.
+      </div>
+      <p><a href="https://www.fec.gov/data/" target="_blank" rel="noreferrer">Explore official FEC data ↗</a></p>
+    </div>
+  </section>
+
+  <section class="scene light" id="strategy">
+    <div class="reveal">
+      <div class="eyebrow">05 / Campaign strategy</div>
+      <h2>Understand<br>the electorate.</h2>
+      <p>
+        Map the district, study publicly available demographic
+        information, explain the campaign's media plan, and
+        describe how polling could measure voter concerns.
+      </p>
+      <div class="timeline">
+        <article>
+          <h3>Research</h3>
+          <p>Identify the district's communities and verify population and voter data.</p>
+        </article>
+        <article>
+          <h3>Communicate</h3>
+          <p>Plan traditional and digital media, with a clear purpose for each channel.</p>
+        </article>
+        <article>
+          <h3>Measure</h3>
+          <p>Use fair, non-leading poll questions to understand public opinion.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene dark" id="media">
+    <div class="reveal">
+      <div class="eyebrow">06 / The campaign portfolio</div>
+      <h2>The campaign<br>in action.</h2>
+      <p>
+        A home for the group's campaign materials. Replace these
+        placeholders with your finished work.
+      </p>
+      <div class="gallery">
+        <article class="panel">
+          <h3>Positive advertisement</h3>
+          <p>Embed the group's 30-second positive ad here.</p>
+        </article>
+        <article class="panel">
+          <h3>Attack advertisement</h3>
+          <p>Embed the group's 30-second comparison or attack ad here.</p>
+        </article>
+        <article class="panel">
+          <h3>Candidate brochure</h3>
+          <p>Add a link to the completed brochure.</p>
+        </article>
+        <article class="panel">
+          <h3>Class polls</h3>
+          <p>Add both Google Forms links and their QR codes.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="sources">
+  <div class="eyebrow">Research and credits</div>
+  <p>
+    Candidate biography:
+    <a href="https://www.mcmahonforcongress.com/" target="_blank" rel="noreferrer">
+      Official campaign website
+    </a>
+  </p>
+  <p>
+    Campaign finance:
+    <a href="https://www.fec.gov/data/" target="_blank" rel="noreferrer">
+      Federal Election Commission
+    </a>
+  </p>
+  <p>
+    Add citations for individual policy claims, demographic
+    statistics, donor records, and images before submission.
+  </p>
+  <p>AP U.S. Government · Selling the Candidate · 2026</p>
+</footer>
+
+<script>
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// Reading progress
+function updateProgress() {
+  const max = document.documentElement.scrollHeight - innerHeight;
+  const amount = max > 0 ? scrollY / max * 100 : 0;
+  document.querySelector("#progress").style.width = amount + "%";
+}
+addEventListener("scroll", updateProgress, { passive: true });
+updateProgress();
+
+// Reveal sections when they enter the viewport
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
+// Parallax on the hero
+const hero = document.querySelector(".hero-content");
+addEventListener("scroll", () => {
+  if (!reduceMotion && scrollY < innerHeight) {
+    hero.style.transform =
+      `translateY(${scrollY * 0.18}px)`;
+  }
+}, { passive: true });
+
+// Count the candidate's campaign-stated years of service
+const counter = document.querySelector("[data-count]");
+let counted = false;
+const counterObserver = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting && !counted) {
+    counted = true;
+    const target = Number(counter.dataset.count);
+    if (reduceMotion) {
+      counter.textContent = target;
+      return;
+    }
+    const start = performance.now();
+    function tick(now) {
+      const t = Math.min((now - start) / 1300, 1);
+      const eased = 1 - Math.pow(1 - t, 4);
+      counter.textContent = Math.round(target * eased);
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+}, { threshold: 0.5 });
+counterObserver.observe(counter);
+
+// Draw the example chart when visible
+const chart = document.querySelector("#chart");
+const chartObserver = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) {
+    chart.querySelectorAll(".bar").forEach(bar => {
+      bar.style.height = bar.dataset.height + "%";
+    });
+    chartObserver.disconnect();
+  }
+}, { threshold: 0.3 });
+chartObserver.observe(chart);
+
+// Change the pinned title as the reader moves through its scene
+const pinWrap = document.querySelector(".pin-wrap");
+const pinTitle = document.querySelector(".pin-title");
+const pinCopy = document.querySelector(".pin-copy");
+const scenes = [
+  ["Who holds<br>the power?",
+   "The Constitution divides federal power among three branches. Scroll to explore their different roles."],
+  ["Three branches.<br>Shared power.",
+   "Congress legislates and oversees. The president enforces the law. The courts resolve legal disputes."],
+  ["Checks and<br>balances.",
+   "Each branch has powers that help limit the power of the others."]
+];
+
+if (!reduceMotion) {
+  addEventListener("scroll", () => {
+    const rect = pinWrap.getBoundingClientRect();
+    const travel = pinWrap.offsetHeight - innerHeight;
+    if (travel <= 0) return;
+    const progress = Math.max(0, Math.min(1, -rect.top / travel));
+    const index = Math.min(2, Math.floor(progress * 3));
+    if (pinTitle.dataset.scene !== String(index)) {
+      pinTitle.dataset.scene = index;
+      pinTitle.innerHTML = scenes[index][0];
+      pinCopy.textContent = scenes[index][1];
+    }
+  }, { passive: true });
+}
+</script>
+</body>
+</html>
