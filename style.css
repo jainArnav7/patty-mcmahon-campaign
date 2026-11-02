@@ -80,13 +80,21 @@ a {
     white-space: nowrap;
 }
 
-.brand img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid var(--accent);
-    box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.18);
+.brand::before {
+    content: "M";
+    display: grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 11px;
+    background: linear-gradient(145deg, #72c6ff, #0a84ff 58%, #0752ad);
+    box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.16), 0 6px 18px rgba(10, 132, 255, 0.25);
+    color: #fff;
+    font-size: 19px;
+    font-weight: 900;
+    letter-spacing: -0.08em;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.35);
 }
 
 .brand .year {
@@ -260,16 +268,14 @@ a {
     color: var(--text-white);
 }
 
-.candidate-badge img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
 /* Unique cinematic headers */
 .hero-candidate { background-image: url("https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&q=80&w=2400"); }
-.hero-issues { background-image: url("https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&q=80&w=2400"); }
+.hero-issues {
+    background-image:
+        radial-gradient(ellipse at 78% 24%, rgba(52, 199, 255, 0.68), transparent 38%),
+        radial-gradient(ellipse at 20% 85%, rgba(10, 132, 255, 0.58), transparent 45%),
+        linear-gradient(135deg, #142d50, #17618a 58%, #10284b);
+}
 .hero-strategy { background-image: url("https://images.unsplash.com/photo-1462206092226-f46025ffe607?auto=format&fit=crop&q=80&w=2400"); }
 .hero-finance { background-image: url("https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=2400"); }
 .hero-ads { background-image: url("https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&q=80&w=2400"); }
@@ -334,6 +340,120 @@ a {
 
 .glass-card p:last-child {
     margin-bottom: 0;
+}
+
+.material-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.campaign-items {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: center;
+    gap: 20px;
+}
+
+.campaign-items-panel {
+    margin-top: 24px;
+}
+
+.campaign-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    font-weight: 800;
+}
+
+.button-sample {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    flex-direction: column;
+    border: 8px solid #d7eaff;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+    text-transform: uppercase;
+}
+
+.button-sample span {
+    font-size: 1.1rem;
+}
+
+.button-sample strong {
+    font-size: 2rem;
+}
+
+.sticker-sample {
+    min-height: 100px;
+    flex-direction: column;
+    gap: 8px;
+    border: 3px solid #fff;
+    border-radius: 18px;
+    background: #10254a;
+    color: #fff;
+    padding: 18px;
+}
+
+.sticker-sample strong {
+    color: #7fc8ff;
+    font-size: 1rem;
+}
+
+.sign-sample {
+    min-height: 150px;
+    flex-direction: column;
+    gap: 8px;
+    border: 8px solid #78c4ff;
+    background: #10254a;
+    padding: 16px;
+}
+
+.sign-sample strong {
+    font-size: 1.45rem;
+}
+
+.sign-sample span {
+    font-size: 0.8rem;
+}
+
+.sign-sample b {
+    color: #78c4ff;
+    font-size: 0.85rem;
+}
+
+.poll-qr {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    margin: 18px auto 0;
+    border-radius: 12px;
+}
+
+.poll-questions {
+    margin: 24px 0 0;
+    padding-left: 1.4rem;
+}
+
+.poll-questions > li {
+    padding: 14px 0;
+    border-top: 1px solid var(--glass-border);
+}
+
+.poll-questions p {
+    margin: 0 0 8px;
+}
+
+.poll-questions ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--text-muted);
 }
 
 .profile-layout {
@@ -526,6 +646,19 @@ footer {
     font-size: 13px;
 }
 
+footer .team-credits {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 24px;
+    max-width: 1000px;
+    margin: 18px auto 0;
+    text-align: left;
+}
+
+footer .team-credits p {
+    margin: 0;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 980px) {
     .nav-toggle-label {
@@ -572,6 +705,14 @@ footer {
     .page-hero {
         min-height: 340px;
     }
+
+    .campaign-items {
+        grid-template-columns: 1fr;
+    }
+
+    footer .team-credits {
+        grid-template-columns: 1fr;
+    }
 }
 
 
@@ -593,4 +734,196 @@ footer {
     width: 100%;
     height: 100%;
     border: 0;
+}
+
+/* ---------- Visual polish ---------- */
+body {
+    background:
+        radial-gradient(ellipse at 12% 18%, rgba(10, 132, 255, 0.1), transparent 34rem),
+        radial-gradient(ellipse at 88% 62%, rgba(52, 199, 89, 0.045), transparent 32rem),
+        var(--bg-dark);
+}
+
+.site-nav {
+    background: rgba(8, 14, 28, 0.9);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+}
+
+.brand {
+    font-size: 15px;
+    letter-spacing: 0.12em;
+}
+
+.nav-links a {
+    padding: 8px 12px;
+}
+
+.nav-links a.active {
+    box-shadow: 0 6px 18px rgba(10, 132, 255, 0.25);
+}
+
+.hero-overlay,
+.page-hero-overlay {
+    background:
+        linear-gradient(90deg, rgba(7, 13, 27, 0.66), rgba(7, 13, 27, 0.18) 72%),
+        linear-gradient(180deg, rgba(11, 17, 32, 0.18), rgba(11, 17, 32, 0.55) 58%, var(--bg-dark));
+}
+
+.eyebrow {
+    color: #78c4ff;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.page-hero-inner .lede {
+    max-width: 680px;
+}
+
+.page-hero-inner {
+    animation: hero-arrive 650ms ease-out both;
+}
+
+@keyframes hero-arrive {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    width: min(1120px, calc(100% - 48px));
+    padding-top: 56px;
+}
+
+.glass-card {
+    border-color: rgba(148, 183, 230, 0.15);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.022));
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.24);
+    transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.glass-card:hover {
+    border-color: rgba(120, 196, 255, 0.3);
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.3);
+}
+
+.glass-card h2 {
+    font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+}
+
+.glass-card h3 {
+    line-height: 1.3;
+}
+
+.glass-card p {
+    color: #cbd5e1;
+}
+
+.glass-card a:not(.btn) {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.btn {
+    border: 1px solid rgba(120, 196, 255, 0.42);
+}
+
+.btn:focus-visible,
+.nav-links a:focus-visible,
+a:focus-visible {
+    outline: 3px solid #a7d8ff;
+    outline-offset: 3px;
+}
+
+.material-image {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.2);
+}
+
+.campaign-items {
+    margin-top: 22px;
+}
+
+.finance-targets {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.finance-target {
+    border-top: 2px solid rgba(120, 196, 255, 0.8);
+}
+
+.finance-target h3 a {
+    color: var(--text-white);
+    text-decoration-color: rgba(120, 196, 255, 0.65);
+}
+
+.finance-target h3 a:hover {
+    color: #8dccff;
+}
+
+.finance-target strong {
+    color: #f8fafc;
+}
+
+.finance-contributions {
+    border-top: 2px solid var(--positive);
+}
+
+.stat {
+    background: linear-gradient(145deg, rgba(10, 132, 255, 0.16), rgba(10, 132, 255, 0.07));
+}
+
+.poll-questions > li::marker {
+    color: #78c4ff;
+    font-weight: 800;
+}
+
+footer {
+    background: rgba(5, 10, 20, 0.4);
+}
+
+@media (max-width: 980px) {
+    .finance-targets {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .container {
+        width: min(100% - 32px, 1120px);
+        padding-top: 36px;
+    }
+
+    .site-nav {
+        padding-right: 18px;
+        padding-left: 18px;
+    }
+
+    .page-hero {
+        padding-bottom: 48px;
+    }
+
+    .glass-card:hover {
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
