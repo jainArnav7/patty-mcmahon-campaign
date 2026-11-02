@@ -638,6 +638,11 @@ a {
     letter-spacing: 0.04em;
 }
 
+.pill-red {
+    background: rgba(239, 68, 68, 0.18);
+    color: #ff8a8a;
+}
+
 footer {
     border-top: 1px solid var(--glass-border);
     padding: 28px 20px 40px;
